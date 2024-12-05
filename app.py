@@ -9,7 +9,7 @@ def sendMessege(str):
     return tele.callBot(str)
 
 @app.route('/')
-def hello_world(str):
+def hello_world():
     return "Hi There"
 
 # Befor pushing to git please comment the below 2 lines
