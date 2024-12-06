@@ -2,8 +2,9 @@ angel_user = 'STKE1079'
 angel_pwd = '2244'
 my_qr_code = 'C56HFA67E4JHZSE7TL3NIYIFC4'
 trading_api_key = '3CQ0NTRN'
+history_api_key = 'IIkIhNUq'
+
 trading_feed_token = None
 trading_token_map = None
-history_api_key = 'IIkIhNUq'
 history_feed_token = None
 history_token_map = None

@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 @app.route('/sendTeleMsg/<string:str>')
 def sendMessege(str):
+    print(str)
     return tele.callBot(str)
 
 @app.route('/')
