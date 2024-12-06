@@ -1,8 +1,9 @@
 import requests
+import os
 
 def callBot(MESSAGE):
-    TOKEN = '7579677410:AAFmbYd-HY3ln4GeMKjPieFjb2r8Fe4VIXw'
-    CHAT_ID = '1449305448'
+    TOKEN = os.environ['TOKEN']
+    CHAT_ID = os.environ['CHAT_ID']
     # url = f"https://api.telegram.org/bot{TOKEN}/getUpdates"
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={MESSAGE}"
     
