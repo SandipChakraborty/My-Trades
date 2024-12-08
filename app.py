@@ -1,19 +1,56 @@
 from flask import Flask
 import telegram_notification as tele
-import service
+import util
 
 app = Flask(__name__)
 
-
-@app.route('/sendTeleMsg/<string:str>')
-def sendMessege(str):
-    print(str)
-    return tele.callBot(str)
-
 @app.route('/')
-def hello_world():
-    return service.getHistoryCalData("NSE","99926000","ONE_MINUTE","2024-11-08 09:16","2024-11-08 10:16")
+def test():
+    return "Hello Sandip!"
+
+
+@app.route('/send_telegram_msg/<string:msg>')
+def send_message(msg: str):
+    return tele.callBot(msg)
+
+@app.route('/maruti')
+def maruti():
+    res = util.get_maruti_current_expiry_fut()
+    return res
+
+@app.route('/bank_nifty')
+def bank_nifty():
+    res = util.get_bank_nifty_current_expiry_fut()
+    return res
+
+@app.route('/nifty/atm/ce')
+def nifty_atm_ce():
+    res = util.get_nifty_atm_ce()
+    print(res)
+    return res
+
+@app.route('/nifty/atm/pe')
+def nifty_atm_pe():
+    res = util.get_nifty_atm_pe()
+    print(res)
+    return res
+
+# @app.route('/set/env/<string:name>/<string:val>')
+# def set_env_var(name, val):
+#     sensitive_env_var = ['trading_api_key', 'angel_user', 'angel_pwd', 'my_qr_code']
+#     if name in sensitive_env_var:
+#         return "Its sensitive!"
+#     res = util.set_env_var(name, val)
+#     return res
+#
+# @app.route('/get/env/<string:name>')
+# def get_env_var(name):
+#     sensitive_env_var = ['trading_api_key', 'angel_user', 'angel_pwd', 'my_qr_code']
+#     if name in sensitive_env_var:
+#         return "Its sensitive!"
+#     res = util.get_env_var(name)
+#     return res
 
 # Befor pushing to git please comment the below 2 lines
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
