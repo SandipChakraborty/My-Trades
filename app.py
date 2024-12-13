@@ -1,6 +1,10 @@
+import asyncio
 from flask import Flask
 import telegram_notification as tele
 import util
+import async_service
+import threading
+import trading_view_service as tv
 
 app = Flask(__name__)
 
@@ -8,6 +12,12 @@ app = Flask(__name__)
 def test():
     return "Hello Sandip!"
 
+# @app.route('/test_script')
+# def run_script():
+#     t1 = threading.Thread(target=asyncio.run(async_service.run_script()))
+#     t1.start()
+#     print("Done!")
+#     return "Script triggered"
 
 @app.route('/send_telegram_msg/<string:msg>')
 def send_message(msg: str):
@@ -35,6 +45,15 @@ def nifty_atm_pe():
     print(res)
     return res
 
+@app.route('/ta_lib')
+def ta_lib():
+    try:
+        tv.test()
+        return "Success"
+    except Exception as e:
+        print("Historic Api failed: {}".format(e.message))
+        return "Failure"
+
 # @app.route('/set/env/<string:name>/<string:val>')
 # def set_env_var(name, val):
 #     sensitive_env_var = ['trading_api_key', 'angel_user', 'angel_pwd', 'my_qr_code']
@@ -52,5 +71,5 @@ def nifty_atm_pe():
 #     return res
 
 # Befor pushing to git please comment the below 2 lines
-# if __name__ == '__main__':
-#     app.run()
+if __name__ == '__main__':
+    app.run()

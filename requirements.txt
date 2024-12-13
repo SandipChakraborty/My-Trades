@@ -6,5 +6,10 @@ pandas~=2.2.3
 logzero~=1.7.0
 pyotp~=2.9.0
 websocket-client
+schedule
+tvdatafeed
+ta-lib
+ta_lib-0.5.1-cp312-cp312-win_amd64.whl
+
 
 
