@@ -7,6 +7,7 @@ logzero~=1.7.0
 pyotp~=2.9.0
 websocket-client
 schedule
+ta-lib
 git+https://github.com/rongardF/tvdatafeed.git
 
 
