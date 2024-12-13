@@ -8,7 +8,7 @@ pyotp~=2.9.0
 websocket-client
 schedule
 ta-lib
-TvDatafeed
+git+https://github.com/rongardF/tvdatafeed.git
 
 
 
