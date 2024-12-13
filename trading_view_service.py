@@ -1,5 +1,4 @@
 from tvDatafeed import TvDatafeed, Interval
-import pandas as pd
 import pandas_ta as ta
 
 
@@ -10,7 +9,7 @@ def test():
                      extended_session=False)
     df = df.reset_index()
     #
-    # df["adx"] = pandas_ta.adx(df['high'], df['low'], df['close'], 8)
+    df["adx"] = ta.adx(df['high'], df['low'], df['close'], 8)
     #
     # df["sma_22"] = pandas_ta.sma(df['close'], 8)
     # df["ema_22"] = pandas_ta.ema(df['close'], 8)
