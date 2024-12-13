@@ -51,7 +51,7 @@ def ta_lib():
         tv.test()
         return "Success"
     except Exception as e:
-        print("Historic Api failed: {}".format(e.message))
+        print("Historic Api failed: {}".format(e))
         return "Failure"
 
 # @app.route('/set/env/<string:name>/<string:val>')
