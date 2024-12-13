@@ -9,7 +9,6 @@ websocket-client
 schedule
 tvdatafeed
 ta-lib
-ta_lib-0.5.1-cp311-cp311-win32.whl
 
 
 
