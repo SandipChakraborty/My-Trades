@@ -7,8 +7,8 @@ logzero~=1.7.0
 pyotp~=2.9.0
 websocket-client
 schedule
-tvdatafeed
 ta-lib
+tvdatafeed
 
 
 
