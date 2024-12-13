@@ -18,8 +18,6 @@ def test():
                      extended_session=False)
     df = df.reset_index()
 
-    help(ta.adx)
-
     #
     df["adx"] = ta.adx(df['high'], df['low'], df['close'], 8)['ADX_8']
     #
@@ -27,6 +25,7 @@ def test():
     # df["ema_22"] = pandas_ta.ema(df['close'], 8)
 
     print(df.tail(5))
+    return df.tail(50)
 
 
 

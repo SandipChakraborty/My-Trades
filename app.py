@@ -48,8 +48,7 @@ def nifty_atm_pe():
 @app.route('/ta_lib')
 def ta_lib():
     try:
-        tv.test()
-        return "Success"
+        return tv.test().values.tolist()
     except Exception as e:
         print("Historic Api failed: {}".format(e))
         return "Failure"
