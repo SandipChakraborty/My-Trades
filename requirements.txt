@@ -9,6 +9,7 @@ websocket-client
 schedule
 TA-Lib
 git+https://github.com/rongardF/tvdatafeed.git
+git+https://github.com/ta-lib/ta-lib-python.git
 
 
 
