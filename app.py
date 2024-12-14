@@ -83,7 +83,7 @@ def my_cron_job():
 
 scheduler.add_job(
     func=my_cron_job,
-    trigger=CronTrigger(hour=19, minute=52, timezone='Asia/Kolkata'),
+    trigger=CronTrigger(hour=19, minute=56, timezone='Asia/Kolkata'),
 )
 
 # Start the scheduler
