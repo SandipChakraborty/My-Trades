@@ -6,6 +6,8 @@ import json
 import trading_view_service as tvs
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
+from logzero import logger
+
 
 app = Flask(__name__)
 scheduler = BackgroundScheduler()
@@ -18,7 +20,7 @@ def test():
 # def run_script():
 #     t1 = threading.Thread(target=asyncio.run(async_service.run_script()))
 #     t1.start()
-#     print("Done!")
+#     logger.info("Done!")
 #     return "Script triggered"
 
 @app.route('/send_telegram_msg/<string:msg>')
@@ -38,13 +40,13 @@ def bank_nifty():
 @app.route('/nifty/atm/ce')
 def nifty_atm_ce():
     res = util.get_nifty_atm_ce()
-    print(res)
+    logger.info(res)
     return res
 
 @app.route('/nifty/atm/pe')
 def nifty_atm_pe():
     res = util.get_nifty_atm_pe()
-    print(res)
+    logger.info(res)
     return res
 
 # @app.route('/set/env/<string:name>/<string:val>')
@@ -66,7 +68,7 @@ def nifty_atm_pe():
 @app.route('/get/history')
 def get_history_nifty_atm_ce():
     nifty_atm_call = json.loads(util.get_nifty_atm_ce())
-    print(nifty_atm_call)
+    logger.info(nifty_atm_call)
     exchange = nifty_atm_call['exchange']
     symbol_token = nifty_atm_call['token']
     interval = 'FIVE_MINUTE'
@@ -78,12 +80,12 @@ def get_history_nifty_atm_ce():
 
 
 def my_cron_job():
-    print('Inside schedulers!')
+    logger.info('Inside schedulers!')
     send_message('Test schedulers!')
 
 scheduler.add_job(
     func=my_cron_job,
-    trigger=CronTrigger(hour=19, minute=56, timezone='Asia/Kolkata'),
+    trigger=CronTrigger(hour=20, minute=5, timezone='Asia/Kolkata'),
 )
 
 # Start the scheduler
@@ -91,5 +93,5 @@ scheduler.start()
 
 
 # Befor pushing to git please comment the below 2 lines
-# if __name__ == '__main__':
-#     app.run()
+if __name__ == '__main__':
+    app.run()
