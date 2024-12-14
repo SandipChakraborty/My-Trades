@@ -50,7 +50,9 @@ def get_session():
 def get_ltp(exchange, symbol, token):
     session = get_session()
     print('token - ', token)
-    return session.ltpData(exchange, symbol, token)
+    res = session.ltpData(exchange, symbol, token)
+    log_out()
+    return res
 
 def log_out():
     try:

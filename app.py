@@ -1,12 +1,14 @@
-import asyncio
 from flask import Flask
 import telegram_notification as tele
 import util
-import async_service
-import threading
-import trading_view_service as tv
+import history_service as hs
+import json
+import trading_view_service as tvs
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 app = Flask(__name__)
+scheduler = BackgroundScheduler()
 
 @app.route('/')
 def test():
@@ -45,14 +47,6 @@ def nifty_atm_pe():
     print(res)
     return res
 
-@app.route('/ta_lib')
-def ta_lib():
-    try:
-        return tv.test().values.tolist()
-    except Exception as e:
-        print("Historic Api failed: {}".format(e))
-        return "Failure"
-
 # @app.route('/set/env/<string:name>/<string:val>')
 # def set_env_var(name, val):
 #     sensitive_env_var = ['trading_api_key', 'angel_user', 'angel_pwd', 'my_qr_code']
@@ -68,6 +62,34 @@ def ta_lib():
 #         return "Its sensitive!"
 #     res = util.get_env_var(name)
 #     return res
+
+@app.route('/get/history')
+def get_history_nifty_atm_ce():
+    nifty_atm_call = json.loads(util.get_nifty_atm_ce())
+    print(nifty_atm_call)
+    exchange = nifty_atm_call['exchange']
+    symbol_token = nifty_atm_call['token']
+    interval = 'FIVE_MINUTE'
+    from_date = '2022-12-14 09:16'
+    to_date = '2024-12-14 09:16'
+    his = hs.get_historical_data(exchange, symbol_token, interval, from_date, to_date)
+    his = tvs.get_sma_22_and_adx_8(his)
+    return his.tail(20).values.tolist()
+
+
+def my_cron_job():
+    # Code to be executed by the cron job
+    print('Hello from my cron job!')
+
+# Schedule the cron job to run every day at 9:30 AM
+scheduler.add_job(
+    func=my_cron_job,
+    trigger=CronTrigger(hour=18, minute=45),
+)
+
+# Start the scheduler
+scheduler.start()
+
 
 # Befor pushing to git please comment the below 2 lines
 if __name__ == '__main__':

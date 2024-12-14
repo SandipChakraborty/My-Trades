@@ -1,5 +1,5 @@
 import util
-
+from util import log_out
 
 
 def place_sl_m_robo_order():
@@ -26,6 +26,7 @@ def place_sl_m_robo_order():
     except Exception as e:
         print("Order placement failed: {}".format(e.message))
     finally:
+        log_out()
         return order_id
 
 
