@@ -78,11 +78,12 @@ def get_history_nifty_atm_ce():
 
 
 def my_cron_job():
+    print('Inside schedulers!')
     send_message('Test schedulers!')
 
 scheduler.add_job(
     func=my_cron_job,
-    trigger=CronTrigger(hour=19, minute=1, timezone='Asia/Kolkata'),
+    trigger=CronTrigger(hour=19, minute=45, timezone='Asia/Kolkata'),
 )
 
 # Start the scheduler
