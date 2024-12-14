@@ -81,10 +81,9 @@ def my_cron_job():
     # Code to be executed by the cron job
     print('Hello from my cron job!')
 
-# Schedule the cron job to run every day at 9:30 AM
 scheduler.add_job(
     func=my_cron_job,
-    trigger=CronTrigger(hour=18, minute=45),
+    trigger=CronTrigger(hour=18, minute=52, timezone='Asia/Kolkata'),
 )
 
 # Start the scheduler
