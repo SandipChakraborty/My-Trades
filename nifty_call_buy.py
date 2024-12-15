@@ -16,9 +16,9 @@ def get_latest_chart(exchange, symbol_token, interval, from_date, to_date):
 
 
 def buy_ce():
-    logger.info('nifty call buy started')
+    # logger.info('nifty call buy started')
     nifty_atm_call = json.loads(util.get_nifty_atm_ce())
-    logger.info(nifty_atm_call)
+    # logger.info(nifty_atm_call)
     exchange = nifty_atm_call['exchange']
     symbol_token = nifty_atm_call['token']
     interval = 'FIVE_MINUTE'
@@ -29,7 +29,7 @@ def buy_ce():
         from_date = one_day_back.strftime("%Y-%m-%d") + " 13:00"
         to_date = now.strftime("%Y-%m-%d") + " 13:00"
         df = get_latest_chart(exchange, symbol_token, interval, from_date, to_date)
-        res = analise_df(df)
+        res = json.loads(analise_df(df))
         # res structure
         #         value = {
         #         "punch_order": False,
@@ -37,8 +37,10 @@ def buy_ce():
         #         "sl": 0,
         #         "target": 0
         #     }
-        if json.loads(res)['punch_order']:
+        if res['punch_order']:
             logger.info('punch order')
+            res['exchange'] = exchange
+            res['symbol_token'] = symbol_token
             tele.callBot(res)
         else:
             logger.info('No order placed!')

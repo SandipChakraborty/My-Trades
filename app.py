@@ -17,7 +17,24 @@ app = Flask(__name__)
 
 @app.route('/')
 def test():
+    res = tt()
+    res = json.loads(res)
+    res['token'] = 'token_num'
+    if res['punch_order']:
+        logger.info('punch order')
+        tele.callBot(res)
+    else:
+        logger.info('No order placed!')
     return 'Hello World!'
+
+def tt():
+    value = {
+            "punch_order": True,
+            "buy_price": 51,
+            "sl": 10,
+            "target": 20
+        }
+    return json.dumps(value)
 
 # Initialize the scheduler
 def start_scheduler():
