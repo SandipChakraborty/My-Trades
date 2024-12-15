@@ -3,6 +3,7 @@ import history_service as hs
 import json
 import util
 import trading_view_service as tvs
+import telegram_notification as tele
 import time
 from datetime import datetime, timedelta
 import pytz
@@ -24,8 +25,7 @@ def buy_ce():
     symbol_token = nifty_atm_call['token']
     interval = 'FIVE_MINUTE'
     while True:
-        time.sleep(300)
-        now = datetime.now(pytz.timezone(util.time_zone_ist()))
+        now = datetime.now(util.time_zone_ist())
         one_day_back = datetime.today() - timedelta(days=1)
         # from_date and to_date pattern '2022-12-14 09:16'
         from_date = one_day_back.strftime("%Y-%m-%d") + " 13:00"
@@ -40,7 +40,8 @@ def buy_ce():
         #         "target": 0
         #     }
         if json.loads(res)['punch_order']:
-            print('punch order')
+            logger.info('punch order')
+            tele.callBot(res)
         else:
             logger.info('No order placed!')
 

@@ -7,9 +7,10 @@ import pandas as pd
 import json
 from datetime import datetime
 import math
+import pytz
 
-def time_zone_ist():
-    return 'Asia/Kolkata'
+def time_zone_ist() -> pytz.timezone:
+    return pytz.timezone('Asia/Kolkata')
 
 def set_env_var(name='SANDIP', value='CHAKRABORTY'):
     os.environ[name] = value
