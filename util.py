@@ -8,6 +8,9 @@ import json
 from datetime import datetime
 import math
 
+def time_zone_ist():
+    return 'Asia/Kolkata'
+
 def set_env_var(name='SANDIP', value='CHAKRABORTY'):
     os.environ[name] = value
     return os.environ.get(name)
@@ -49,7 +52,6 @@ def get_session():
 
 def get_ltp(exchange, symbol, token):
     session = get_session()
-    print('token - ', token)
     res = session.ltpData(exchange, symbol, token)
     log_out()
     return res

@@ -10,6 +10,7 @@ schedule
 git+https://github.com/twopirllc/pandas-ta.git
 git+https://github.com/rongardF/tvdatafeed.git
 apscheduler
+pytz
 
 
 
