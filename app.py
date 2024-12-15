@@ -16,6 +16,10 @@ import cron_jobs as jobs
 app = Flask(__name__)
 
 @app.route('/')
+def home():
+    return 'Hello World!'
+
+@app.route('/test')
 def test():
     res = tt()
     res = json.loads(res)
@@ -49,5 +53,5 @@ start_scheduler()
 
 
 # Before pushing to git please comment the below 2 lines
-# if __name__ == '__main__':
-#     app.run(debug=True, use_reloader=False)
+if __name__ == '__main__':
+    app.run(debug=True, use_reloader=False)
