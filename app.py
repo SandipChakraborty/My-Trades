@@ -44,10 +44,9 @@ def start_scheduler():
     scheduler.start()
     print("Scheduler started.")
 
+start_scheduler()
+
 
 # Befor pushing to git please comment the below 2 lines
-if __name__ == '__main__':
-    # Start the scheduler before running the Flask app
-    start_scheduler()
-    # Start the Flask app
-    app.run(use_reloader=False)
+# if __name__ == '__main__':
+#     app.run(use_reloader=False)
