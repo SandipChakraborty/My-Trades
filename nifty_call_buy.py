@@ -4,9 +4,7 @@ import json
 import util
 import trading_view_service as tvs
 import telegram_notification as tele
-import time
 from datetime import datetime, timedelta
-import pytz
 import candle as cdl
 
 ce_buy_order_status: json = None
