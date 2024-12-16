@@ -6,7 +6,6 @@ import pytz
 from logzero import logger
 import requests
 
-
 def ncb_job():
     try:
         # logger.info(f"ncb_job executed at {datetime.now()}")
@@ -43,3 +42,13 @@ def test_job():
         logger.info(requests.get(url))
     except Exception as e:
         logger.error(f"Error occurred: {e}")
+
+def opening_price():
+    logger.info('opening price fetching started for nifty and bank_nifty')
+    df = util.get_master_list()
+    nifty_open_price_today = util.get_nifty_ltp(df)
+    util.set_env_var('nifty_open_price_today', nifty_open_price_today)
+    bank_nifty_open_price_today = util.get_bank_nifty_ltp(df)
+    util.set_env_var('bank_nifty_open_price_today', bank_nifty_open_price_today)
+    logger.info(f"nifty_open_price_today = {util.get_env_var('nifty_open_price_today')}")
+    logger.info(f"bank_nifty_open_price_today = {util.get_env_var('bank_nifty_open_price_today')}")

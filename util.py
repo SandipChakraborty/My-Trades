@@ -12,8 +12,8 @@ import pytz
 def time_zone_ist() -> pytz.timezone:
     return pytz.timezone('Asia/Kolkata')
 
-def set_env_var(name='SANDIP', value='CHAKRABORTY'):
-    os.environ[name] = value
+def set_env_var(name: str, value):
+    os.environ[name] = str(value)
     return os.environ.get(name)
 
 def get_env_var(var_name):
@@ -111,7 +111,7 @@ def get_idx_ltp(df_ltp, exg='NSE', symbol='NIFTY', name='NIFTY'):
 
 def get_nifty_atm_ce():
     df = get_master_list()
-    nifty_ltp = get_nifty_ltp(df)
+    nifty_ltp = float(get_env_var('nifty_open_price_today'))
     ce_atm_strike = roundup(nifty_ltp)
     df = df[df['exch_seg'] == 'NFO']
     df = df[df['name'] == 'NIFTY']
@@ -128,7 +128,7 @@ def get_nifty_atm_ce():
 
 def get_nifty_atm_pe():
     df = get_master_list()
-    nifty_ltp = get_nifty_ltp(df)
+    nifty_ltp = float(get_env_var('nifty_open_price_today'))
     pe_atm_strike = roundup(nifty_ltp)-100
     df = df[df['exch_seg'] == 'NFO']
     df = df[df['name'] == 'NIFTY']

@@ -27,6 +27,10 @@ def tele_msg(text):
 def start_scheduler():
     scheduler = BackgroundScheduler()
     # Schedule job to run every 10 seconds
+    trigger = CronTrigger(
+        year="*", month="*", day="*", hour="9", minute="15", second="0", timezone=util.time_zone_ist()
+    )
+    scheduler.add_job(jobs.opening_price, trigger=trigger)
     scheduler.add_job(jobs.ncb_job, IntervalTrigger(seconds=10))
     scheduler.add_job(jobs.npb_job, IntervalTrigger(seconds=10))
     scheduler.add_job(jobs.test_job, IntervalTrigger(seconds=30))
