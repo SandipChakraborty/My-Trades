@@ -19,31 +19,14 @@ app = Flask(__name__)
 def home():
     return 'Hello World!'
 
-@app.route('/test')
-def test():
-    res = tt()
-    res = json.loads(res)
-    res['token'] = 'token_num'
-    if res['punch_order']:
-        logger.info('punch order')
-        tele.callBot(res)
-    else:
-        logger.info('No order placed!')
-    return 'Hello World!'
-
-def tt():
-    value = {
-            "punch_order": True,
-            "buy_price": 51,
-            "sl": 10,
-            "target": 20
-        }
-    return json.dumps(value)
+@app.route('/msg/<string:text>')
+def tele_msg(text):
+    return tele.callBot(text)
 
 # Initialize the scheduler
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    # Schedule job to run every 5 seconds
+    # Schedule job to run every 10 seconds
     scheduler.add_job(jobs.ncb_job, IntervalTrigger(seconds=10))
     scheduler.add_job(jobs.npb_job, IntervalTrigger(seconds=10))
     scheduler.start()
