@@ -4,6 +4,7 @@ import nifty_put_buy as npb
 import util
 import pytz
 from logzero import logger
+import requests
 
 
 def ncb_job():
@@ -33,5 +34,12 @@ def npb_job():
 
         if (now > start_time) and (now < end_time):
             npb.buy_pe()
+    except Exception as e:
+        logger.error(f"Error occurred: {e}")
+
+def test_job():
+    try:
+        url = 'https://trade-with-sandips-code.onrender.com'
+        logger.info(requests.get(url))
     except Exception as e:
         logger.error(f"Error occurred: {e}")

@@ -29,6 +29,7 @@ def start_scheduler():
     # Schedule job to run every 10 seconds
     scheduler.add_job(jobs.ncb_job, IntervalTrigger(seconds=10))
     scheduler.add_job(jobs.npb_job, IntervalTrigger(seconds=10))
+    scheduler.add_job(jobs.test_job, IntervalTrigger(seconds=30))
     scheduler.start()
     logger.info("Scheduler started.")
 
@@ -36,5 +37,5 @@ start_scheduler()
 
 
 # Before pushing to git please comment the below 2 lines
-if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+# if __name__ == '__main__':
+#     app.run(debug=True, use_reloader=False)
